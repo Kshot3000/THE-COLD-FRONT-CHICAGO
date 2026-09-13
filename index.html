@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cold Front — Chicago Bears Fan Hub</title>
+<meta name="description" content="The Cold Front — an independent Chicago Bears fan hub. Live scores, odds from Vegas, Kalshi & Polymarket, injury report, news, schedule and stats.">
+<meta name="theme-color" content="#0B1F3A">
+<meta property="og:title" content="The Cold Front — Chicago Bears Fan Hub">
+<meta property="og:description" content="Live Bears scores, betting odds (Vegas/Kalshi/Polymarket), injuries, news, schedule & stats.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="https://a.espncdn.com/i/teamlogos/nfl/500/chi.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" defer></script>
+</head>
+<body>
+<div id="boot-bar"><div class="boot-inner"><span id="boot-msg">Loading the front…</span><span class="boot-spinner"></span></div></div>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top" data-tab="home">
+      <img src="https://a.espncdn.com/i/teamlogos/nfl/500/chi.png" alt="Bears logo" onerror="this.remove()">
+      <span class="brand-name">THE <em>COLD FRONT</em></span>
+    </a>
+    <nav class="nav" id="nav">
+      <button class="nav-link active" data-tab="home">Home</button>
+      <button class="nav-link" data-tab="odds">Odds</button>
+      <button class="nav-link" data-tab="news">News</button>
+      <button class="nav-link" data-tab="standings">Standings</button>
+      <button class="nav-link" data-tab="schedule">Schedule</button>
+      <button class="nav-link" data-tab="injuries">Injuries</button>
+      <button class="nav-link" data-tab="roster">Roster</button>
+      <button class="nav-link" data-tab="about">About</button>
+    </nav>
+    <div class="live-pill" id="live-pill" title="Live data status">
+      <span class="live-dot"></span><span id="live-status">connecting</span>
+    </div>
+  </div>
+</header>
+
+<div class="tickerbar" id="tickerbar"><div class="ticker-track" id="ticker-track"><span>Fetching the latest from Windy City…</span></div></div>
+
+<main id="top" class="wrap">
+
+  <!-- ===================== HOME / HERO ===================== -->
+  <section class="tab active" id="tab-home">
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-week"><span id="hero-week">2026 SEASON</span></div>
+        <h1 class="hero-title">THE COLD FRONT</h1>
+        <p class="hero-sub">Your independent Chicago Bears hub — live scores, sharp odds, and everything from Soldier Field to the streets of Chicago.</p>
+        <div class="hero-cta">
+          <a class="btn btn-orange" href="#odds" data-tab="odds">See Today's Odds</a>
+          <a class="btn btn-ghost" href="https://x.com/kshot9000" target="_blank" rel="noopener">Follow @kshot9000 on X ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEXT GAME -->
+    <div class="card nextgame" id="nextgame-card">
+      <div class="card-head"><h2>Next Game</h2><span class="card-note" id="ng-week"></span></div>
+      <div class="ng-body" id="ng-body">
+        <div class="skeleton" style="height:120px"></div>
+      </div>
+      <div class="ng-foot">
+        <div class="ng-stat"><label>Moneyline (Vegas)</label><b id="ng-ml">—</b></div>
+        <div class="ng-stat"><label>Spread (Vegas)</label><b id="ng-spread">—</b></div>
+        <div class="ng-stat"><label>Total O/U</label><b id="ng-ou">—</b></div>
+        <div class="ng-stat"><label>Polymarket win%</label><b id="ng-pm">—</b></div>
+        <div class="ng-stat"><label>Kalshi win%</label><b id="ng-kx">—</b></div>
+      </div>
+    </div>
+
+    <!-- SCOREBOARD TODAY -->
+    <div class="card">
+      <div class="card-head"><h2 id="sb-title">Today's Games</h2><button class="mini-btn" id="sb-refresh" type="button">↻ Refresh</button></div>
+      <div class="sb-grid" id="sb-grid"><div class="skeleton" style="height:60px"></div></div>
+    </div>
+
+    <!-- LIVE NEWS PREVIEW -->
+    <div class="card">
+      <div class="card-head"><h2>Live News</h2><a class="card-note" href="#news" data-tab="news">All news →</a></div>
+      <div class="news-list" id="news-home"></div>
+    </div>
+
+    <!-- STANDINGS TEASER -->
+    <div class="card">
+      <div class="card-head"><h2>NFC North</h2><a class="card-note" href="#standings" data-tab="standings">Full standings →</a></div>
+      <div class="table-wrap" id="standings-home"><div class="skeleton" style="height:120px"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== ODDS ===================== -->
+  <section class="tab" id="tab-odds">
+    <div class="card">
+      <div class="card-head">
+        <h2>Betting Odds <span class="sub" id="odds-game-label"></span></h2>
+        <div class="odds-refresh"><span id="odds-updated">not loaded</span><button class="mini-btn" id="odds-refresh" type="button">↻ Refresh</button></div>
+      </div>
+      <div class="odds-grid">
+        <div class="odds-col">
+          <div class="odds-provider vegas">
+            <div class="op-head"><span class="op-logo">🎰</span><b>Vegas</b><span class="op-src">via ESPN / DraftKings</span></div>
+            <div id="odds-vegas" class="odds-body"><div class="skeleton" style="height:120px"></div></div>
+          </div>
+        </div>
+        <div class="odds-col">
+          <div class="odds-provider polymarket">
+            <div class="op-head"><span class="op-logo">🔷</span><b>Polymarket</b><span class="op-src">prediction market</span></div>
+            <div id="odds-pm" class="odds-body"><div class="skeleton" style="height:120px"></div></div>
+          </div>
+        </div>
+        <div class="odds-col">
+          <div class="odds-provider kalshi">
+            <div class="op-head"><span class="op-logo">🇺🇸</span><b>Kalshi</b><span class="op-src">regulated exchange</span></div>
+            <div id="odds-kx" class="odds-body"><div class="skeleton" style="height:120px"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="odds-footnote">
+        Odds are informational only, aggregated publicly and may lag. <b>Gamble responsibly.</b> 21+. Not affiliated with the NFL, ESPN, DraftKings, Kalshi, or Polymarket.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>Market Movers <span class="sub">Bears-related prediction markets</span></h2></div>
+      <div class="pm-grid" id="pm-movers"><div class="skeleton" style="height:120px"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== NEWS ===================== -->
+  <section class="tab" id="tab-news">
+    <div class="card">
+      <div class="card-head">
+        <h2>News Feed</h2>
+        <div class="news-controls">
+          <button class="chip active" data-filter="all" type="button">All NFL</button>
+          <button class="chip" data-filter="bears" type="button">🔵 Bears Only</button>
+          <button class="mini-btn" id="news-refresh" type="button">↻</button>
+        </div>
+      </div>
+      <div class="news-list" id="news-full"></div>
+    </div>
+  </section>
+
+  <!-- ===================== STANDINGS ===================== -->
+  <section class="tab" id="tab-standings">
+    <div class="card">
+      <div class="card-head"><h2>NFC North</h2></div>
+      <div class="table-wrap" id="standings-north"><div class="skeleton" style="height:120px"></div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>NFC Standings</h2></div>
+      <div class="table-wrap" id="standings-nfc"><div class="skeleton" style="height:120px"></div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>AFC Standings</h2></div>
+      <div class="table-wrap" id="standings-afc"><div class="skeleton" style="height:120px"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== SCHEDULE ===================== -->
+  <section class="tab" id="tab-schedule">
+    <div class="card">
+      <div class="card-head"><h2>2026 Season Schedule</h2><span class="card-note" id="sched-note"></span></div>
+      <div class="sched-list" id="sched-list"><div class="skeleton" style="height:200px"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== INJURIES ===================== -->
+  <section class="tab" id="tab-injuries">
+    <div class="card">
+      <div class="card-head">
+        <h2>Injury Report</h2>
+        <div class="news-controls"><span class="card-note">updated live</span><button class="mini-btn" id="injury-refresh" type="button">↻</button></div>
+      </div>
+      <div id="injury-list"><div class="skeleton" style="height:120px"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== ROSTER ===================== -->
+  <section class="tab" id="tab-roster">
+    <div class="card">
+      <div class="card-head">
+        <h2>Roster &amp; Stats</h2>
+        <div class="news-controls">
+          <select id="roster-pos" class="pos-select">
+            <option value="offense">Offense</option>
+            <option value="defense">Defense</option>
+            <option value="special">Special Teams</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap" id="roster-table"><div class="skeleton" style="height:200px"></div></div>
+      <p class="card-note pad">Player stats refresh when available this season via ESPN.</p>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT / DONATE ===================== -->
+  <section class="tab" id="tab-about">
+    <div class="card about">
+      <h2>About The Cold Front</h2>
+      <p>An independent, fan-built hub for the <b>Chicago Bears</b> — no paywall, no corporate fluff. Just the score, the odds, and the story, updated live from public data sources (ESPN, Kalshi, Polymarket).</p>
+      <div class="about-grid">
+        <div class="about-tile">
+          <h3>Developer</h3>
+          <p class="big">Kyle — <a href="https://x.com/kshot9000" target="_blank" rel="noopener">@kshot9000</a></p>
+          <p>Questions, corrections, or feature ideas? Hit me up on X.</p>
+          <a class="btn btn-orange" href="https://x.com/kshot9000" target="_blank" rel="noopener">Follow on X ↗</a>
+        </div>
+        <div class="about-tile donate">
+          <h3>Support the Front ☕</h3>
+          <p>Running this site costs a few sats. If it keeps you informed, a donation keeps the cold front coming.</p>
+          <div class="btc-box">
+            <label>Bitcoin (BTC)</label>
+            <code id="btc-addr"></code>
+            <button class="mini-btn" id="btc-copy" type="button">⧉ Copy</button>
+          </div>
+          <div class="btc-qr"><canvas id="btc-qr-canvas"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>THE COLD FRONT · built by <a href="https://x.com/kshot9000" target="_blank" rel="noopener">@kshot9000</a></span>
+    <span>Unofficial fan site. Not affiliated with the NFL or the Chicago Bears. Data: ESPN · Kalshi · Polymarket. <a href="https://github.com/Kshot3000/THE-COLD-FRONT-CHICAGO" target="_blank" rel="noopener">View source on GitHub</a></span>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
