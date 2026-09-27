@@ -1,5 +1,9 @@
 # 🐻 The Cold Front — Chicago Bears Fan Hub
 
+> **Superseded.** Active development moved to the flagship site **ColdFront** at
+> **https://coldfronthq.com** (repo [`Kshot3000/ColdFront`](https://github.com/Kshot3000/ColdFront)).
+> This repo stays up for reference only and is an archive candidate.
+
 An independent, fan-built website for the **Chicago Bears** — live scores, sharp odds, injury report, news, schedule, and stats. Built for fans, by a fan. No paywall, no corporate fluff.
 
 **Live site:** https://kshot3000.github.io/THE-COLD-FRONT-CHICAGO/
